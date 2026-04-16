@@ -132,7 +132,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                   colorFilter: ColorFilter.mode(AppColors.primary, BlendMode.srcIn),
                 ),
 
-                SizedBox(width: 35),
+                SizedBox(width: 40),
 
                 // Clinics
                 GestureDetector(
@@ -162,7 +162,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                   ),
                 ),
 
-                SizedBox(width: 25),
+                SizedBox(width: 30),
 
                 // Tools
                 GestureDetector(
