@@ -92,7 +92,7 @@ class _ClinicsScreenState extends State<ClinicsScreen> {
               return ListViewCard(
                 product: product,
                 isFavorite: _favorites[index],
-                onTap: () =>
+                onFavoriteTap: () =>
                     setState(() => _favorites[index] = !_favorites[index]),
               );
             },
@@ -122,7 +122,7 @@ class _ClinicsScreenState extends State<ClinicsScreen> {
               return ListViewCard(
                 product: product,
                 isFavorite: _favorites[index],
-                onTap: () =>
+                onFavoriteTap: () =>
                     setState(() => _favorites[index] = !_favorites[index]),
                      );
                    },

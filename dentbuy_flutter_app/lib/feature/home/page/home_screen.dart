@@ -15,7 +15,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<bool> _favorites = List.generate(4, (_) => false);
+  final List<bool> _favoritesRent = List.generate(4, (_) => false);
+  final List<bool> _favoritesSale = List.generate(4, (_) => false);
+  final List<bool> _favoritesTools = List.generate(4, (_) => false);
 
   String _selectedCity = 'Mansoura';
 
@@ -227,11 +229,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 250,
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
-                  itemCount: _favorites.length,
+                  itemCount: _favoritesRent.length,
                   separatorBuilder: (_, __) => SizedBox(width: 10),
                   itemBuilder: (context, index) => ListViewCard(
-                    isFavorite: _favorites[index],
-                    onTap: () => setState(() => _favorites[index] = !_favorites[index]),
+                    isFavorite: _favoritesRent[index],
+                    onFavoriteTap: () => setState(() => _favoritesRent[index] = !_favoritesRent[index]),
                     product: clinicProducts[index],
                   ),
                 ),
@@ -261,11 +263,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 250,
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
-                  itemCount: _favorites.length,
+                  itemCount: _favoritesSale.length,
                   separatorBuilder: (_, __) => SizedBox(width: 10),
                   itemBuilder: (context, index) => ListViewCard(
-                    isFavorite: _favorites[index],
-                    onTap: () => setState(() => _favorites[index] = !_favorites[index]), product:   clinicProducts[index],
+                    isFavorite: _favoritesSale[index],
+                    onFavoriteTap: () => setState(() => _favoritesSale[index] = !_favoritesSale[index]), 
+                    product: clinicProducts.reversed.toList()[index],
                   ),
                 ),
               ),
@@ -293,11 +296,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 250,
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
-                  itemCount: _favorites.length,
+                  itemCount: _favoritesTools.length,
                   separatorBuilder: (_, __) => SizedBox(width: 10),
                   itemBuilder: (context, index) => ListViewCard(
-                    isFavorite: _favorites[index],
-                    onTap: () => setState(() => _favorites[index] = !_favorites[index]), product:   clinicProducts[index],
+                    isFavorite: _favoritesTools[index],
+                    onFavoriteTap: () => setState(() => _favoritesTools[index] = !_favoritesTools[index]), 
+                    product: toolProducts[index],
                   ),
                 ),
               ),

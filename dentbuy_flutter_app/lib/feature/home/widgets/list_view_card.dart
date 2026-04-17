@@ -1,22 +1,42 @@
 import 'package:dentbuy_flutter_app/core/utils/app_colors.dart';
 import 'package:dentbuy_flutter_app/feature/home/models/list_model.dart';
+import 'package:dentbuy_flutter_app/feature/home/models/product_model.dart';
+import 'package:dentbuy_flutter_app/feature/home/page/product_details_screen.dart';
 import 'package:flutter/material.dart';
 
 class ListViewCard extends StatelessWidget {
   final ProductModel product;
   final bool isFavorite;
-  final VoidCallback onTap;
+  final VoidCallback onFavoriteTap;
 
   const ListViewCard({
     super.key,
     required this.product,
     required this.isFavorite,
-    required this.onTap,
+    required this.onFavoriteTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => ProductDetailsScreen(
+              product: Product(
+                id: DateTime.now().toString(),
+                title: product.name,
+                description: 'Detailed description for ${product.name} located in ${product.location}',
+                price: double.tryParse(product.price.replaceAll(RegExp(r'[^0-9.]'), '')) ?? 0.0,
+                imageUrl: product.image,
+                sellerId: 'Seller_001',
+              ),
+            ),
+          ),
+        );
+      },
+      child: Container(
       width: 180,
       decoration: BoxDecoration(
         border: Border.all(color: AppColors.graycolor),
@@ -31,7 +51,7 @@ class ListViewCard extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
               child: Image.asset(
-                "assets/images/clinic.png",
+                product.image,
                 width: double.infinity,
                 fit: BoxFit.cover,
               ),
@@ -47,8 +67,10 @@ class ListViewCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Clinic for rent',
+                    product.name,
                     style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
 
                   const SizedBox(height: 8),
@@ -85,7 +107,7 @@ class ListViewCard extends StatelessWidget {
                         ),
                       ),
                       GestureDetector(
-                        onTap: onTap,
+                        onTap: onFavoriteTap,
                         child: Icon(
                           isFavorite ? Icons.bookmark : Icons.bookmark_border,
                           color: isFavorite
@@ -101,6 +123,7 @@ class ListViewCard extends StatelessWidget {
           ),
         ],
       ),
+    ),
     );
   }
 }
